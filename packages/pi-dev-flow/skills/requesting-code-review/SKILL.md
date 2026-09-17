@@ -70,10 +70,17 @@ Focus: error handling, duplicate side effects, and test coverage.
 
 ### 3. Act on the findings
 
-- Fix high-severity issues first
-- Fix medium-severity issues before treating the work as complete
-- Decide whether low-severity items should be fixed now or noted for later
+- Fix blocking issues that are within the stated review scope before continuing or shipping
+- Record non-blocking or out-of-scope findings as follow-up work instead of extending the current work
 - If a finding seems wrong, verify it against the code and push back with evidence
+
+## Bounded Review
+
+Keep every review bounded by its concrete scope and intended behavior. After fixing findings, request at most one follow-up review to verify those fixes.
+
+If the user explicitly requests review rounds beyond the initial review and one follow-up, stop before dispatching more reviews. Create a new review brief with a finite review budget that states the additional scope, intended behavior, and exact number of additional rounds. Do not run an open-ended "review until clean" loop.
+
+Review does not close a tracked task. The user controls task closure.
 
 ## Review Cadence
 

@@ -36,6 +36,16 @@ No production code for a new behavior without a failing test first.
 
 If code was already written for the behavior and no failing test came first, do not pretend it was TDD. Either backfill tests consciously or restart the change with an actual red-green-refactor cycle.
 
+## Controller-Frozen Cycle Brief
+
+Before changing code, receive a controller-provided frozen brief that specifies:
+
+- the focused verification scope for the next behavior slice
+- the broader verification scope to run after green
+- a finite attempt and retry budget for the red and green steps
+
+Keep each red-green-refactor cycle to the assigned behavior slice and one small production change. The active agent must not define, amend, expand, or re-scope the brief or budget. Count each red or green attempt against the budget. If the budget or retry limit is reached, or the required test or production scope exceeds the frozen slice, stop immediately, record what the current test proves and the attempt evidence, and return to the controller for a new frozen brief. Do not self-authorize additional attempts.
+
 ## Red-Green-Refactor
 
 ### 1. RED

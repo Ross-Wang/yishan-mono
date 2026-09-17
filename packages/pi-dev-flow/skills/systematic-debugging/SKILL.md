@@ -37,6 +37,16 @@ No fix before root-cause investigation.
 
 If you have not yet reproduced the issue, collected evidence, and formed a concrete hypothesis, you are not ready to implement a fix.
 
+## Controller-Frozen Investigation Brief
+
+Before investigating, receive a controller-provided frozen brief that specifies:
+
+- the failure boundary: the specific behavior, path, environment, or component chain in scope
+- the evidence needed to reproduce or localize the failure
+- a finite investigation and retry budget, such as a limited number of reproductions, traces, hypotheses, boundary checks, or fix attempts
+
+The active agent must not define, amend, expand, or re-scope this brief or budget. Count each attempted reproduction, trace, hypothesis check, boundary check, or fix against the applicable budget. When the budget or retry limit is reached, stop immediately, record the attempts and evidence (including results and remaining uncertainty), and return to the controller for a new frozen brief. Do not self-authorize additional attempts.
+
 ## The Four Phases
 
 ### 1. Root-Cause Investigation
@@ -88,17 +98,15 @@ Once the root cause is identified:
 
 For test-first fixes, use the local `test-driven-development` skill.
 
-## If Repeated Fixes Fail
+## If Fix Attempts Fail
 
-If two or three attempted fixes fail, stop assuming this is a small bug.
+Each fix attempt consumes the controller-provided retry budget. If an attempt fails, use the remaining budget only as the frozen brief allows. When the retry limit is reached, stop, record the failed attempts and evidence, and return to the controller for a new frozen brief. Do not authorize more fixes yourself.
 
-At that point, question:
+Use the recorded evidence to identify whether the failure may involve:
 
-- whether the architecture is wrong for this path
-- whether the failure is a symptom of hidden coupling or invalid assumptions
-- whether you are fixing effects instead of causes
-
-Do not keep piling on fixes without rethinking the problem.
+- an unsuitable architecture for this path
+- hidden coupling or invalid assumptions
+- effects being fixed instead of causes
 
 ## Multi-Component Debugging
 
